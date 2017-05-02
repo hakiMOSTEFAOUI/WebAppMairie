@@ -1,0 +1,59 @@
+﻿<div class="arretes view">
+    <div class="container">
+        <header>
+            <h3>Arrêtés</h3>
+        </header>
+        <div class="row">
+            <div class="span3">
+                Type d'autorisation:
+                <br />
+                <input data-ng-model="newArrete.typeAutorisation" type="text" placeholder="Type d'autorisation">
+            </div>
+            <div class="span3">
+                Date de pétition:
+                <br />
+                <input data-ng-model="newArrete.petitionDate" type="text" datetime="yyyy-MM-dd" placeholder="Date de pétition">
+            </div>
+            <div class="span3">
+                Info type d'autorisation:
+                <br />
+                <input data-ng-model="newArrete.additionnalInfoTypeAutorisation" type="text" placeholder="Info type d'autorisation">
+            </div>
+            <div class="span3">
+                Début:
+                <br />
+                <input data-ng-model="newArrete.startDateAutorisation" type="text" datetime="yyyy-MM-dd" placeholder="Début">
+            </div>
+            <div class="span3">
+                Fin:
+                <br />
+                <input data-ng-model="newArrete.endDateAutorisation" type="text" datetime="yyyy-MM-dd" placeholder="Fin">
+            </div>
+            <div class="span3">
+                Tarif:
+                <br />
+                <input data-ng-model="newArrete.tarif" ui-currency type="text" datetime="yyyy-MM-dd" placeholder="Tarif">
+            </div>
+            
+            <div class="span6">
+                valid:
+                <br />
+                <input data-ng-model="newArrete.topValid" type="text" placeholder="valid">
+                <button id="submitArrete" class="btn btn-primary" type="button" 
+                    data-ng-disabled="!newArrete.typeAutorisation || !newArrete.petitionDate " 
+                    data-ng-click="insertArrete()">Add Arrete</button>
+            </div>
+        </div>
+        <br /><br />
+        <div>
+            <div class="row cardContainer">
+                <div class="span3 card" data-ng-repeat="Arrete in Arretes | orderBy:'lastName'">
+                    <button class="btn close cardClose" data-ng-click="deleteArrete(Arrete.id)">&times;</button>
+                    <div class="cardHeader">{{Arrete.number + ' ' + Arrete.typeAutorisation}}</div>
+                    <div class="cardBody">{{Arrete.petitionDate}}</div>
+                    <a href="#/Arreteorders/{{Arrete.number}}" class="cardBody btn-link">View {{ Arrete.orders.length }} Orders</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+﻿<script type="text/ng-template" id="customTemplate.html">
+  <a>
+      <img ng-src="http://upload.wikimedia.org/wikipedia/commons/thumb/{{match.model.flag}}" width="16">
+      <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+  </a>
+</script>
+
+<div class="arretes">
+	<div class="cardContainer">
+	    <div class="title">Recherche des arrêtés</div>
+		<div class="row">
+			<ul>
+				<li class="span3 card"
+					ng-repeat="arrete in arretes | startFrom:(currentPage-1)*pageSize | limitTo:pageSize">
+					<button class="btn close cardClose"
+						data-ng-click="deleteArrete(Arrete.id)">&times;</button>
+					<div class="cardHeader">{{arrete.number + ' ' +
+						arrete.typeAutorisation}}</div>
+					<div class="cardBody">
+						{{arrete.petitionDate | date:'EEE dd MMM yyyy'}} <a
+							href="#!/arrete/{{arrete.number}}" class="cardBody btn-link">
+							{{ arrete.arretes.length }} Détail</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div uib-pagination items-per-page="pageSize" total-items="totalItems"
+			ng-model="currentPage" max-size="maxSize" class="pagination-sm"
+			boundary-links="true" force-ellipses="true"></div>
+	</div>
+	<div class="row fields" ng-show="globals.currentUser">
+	    <div class="title">Saisie arrêté</div>
+		<div class="span3">
+			Type d'autorisation: <br /> <input type="text"
+				data-ng-model="newArrete.typeAutorisation"
+				placeholder="Custom template"
+				uib-typeahead="state as state.name for state in statesWithFlags | filter:{name:$viewValue}"
+				typeahead-template-url="customTemplate.html" class="form-control"
+				typeahead-show-hint="true" typeahead-min-length="0">
+		</div>
+		<div class="span3">
+			Info type d'autorisation: <br /> <input
+				data-ng-model="newArrete.additionnalInfoTypeAutorisation"
+				type="text" placeholder="Info type d'autorisation">
+		</div>
+		<div class="span3">
+			Tarif: <br /> <input data-ng-model="newArrete.tarif" ui-currency
+				ui-mask="€99 999,99" type="" placeholder="Tarif">
+		</div>
+		<div class="span3">
+			Date pétiton : <br />
+			<p class="input-group">
+				<input data-ng-model="newArrete.petitionDate" type="text"
+					class="form-control" uib-datepicker-popup="dd/MM/yyyy"
+					is-open="popup1.opened" datepicker-options="dateOptions"
+					ng-required="true" close-text="Close"
+					alt-input-formats="altInputFormats" /> <span
+					class="input-group-btn">
+					<button type="button" class="btn btn-default" ng-click="open1()">
+						<i class="glyphicon glyphicon-calendar"></i>
+					</button>
+				</span>
+			</p>
+		</div>
+		<div class="span3">
+			Début : <br />
+			<p class="input-group">
+				<input data-ng-model="newArrete.startDateAutorisation" type="text"
+					class="form-control" uib-datepicker-popup="dd/MM/yyyy"
+					is-open="popup2.opened" datepicker-options="dateOptions"
+					ng-required="true" close-text="Close"
+					alt-input-formats="altInputFormats" /> <span
+					class="input-group-btn">
+					<button type="button" class="btn btn-default" ng-click="open2()">
+						<i class="glyphicon glyphicon-calendar"></i>
+					</button>
+				</span>
+			</p>
+		</div>
+		<div class="span3">
+			Fin : <br />
+			<p class="input-group">
+				<input data-ng-model="newArrete.endDateAutorisation" type="text"
+					class="form-control" uib-datepicker-popup="dd/MM/yyyy"
+					is-open="popup3.opened" datepicker-options="dateOptions"
+					ng-required="true" close-text="Close"
+					alt-input-formats="altInputFormats" /> <span
+					class="input-group-btn">
+					<button type="button" class="btn btn-default" ng-click="open3()">
+						<i class="glyphicon glyphicon-calendar"></i>
+					</button>
+				</span>
+			</p>
+		</div>
+
+		<div class="span12">
+			Contenu : <br />
+			<p class="input-group">
+				<textarea ckeditor="editorOptions" ng-model="newArrete.contenu"></textarea>
+			</p>
+		</div>
+
+
+		<div class="span3">
+			<button id="submitArrete" class="btn btn-primary" type="button"
+				data-ng-disabled="!newArrete.typeAutorisation || !newArrete.petitionDate "
+				data-ng-click="insertArrete()">Ajouter Arrêté</button>
+		</div>
+	</div>
+</div>

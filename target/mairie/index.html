@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="mairieApp">
+<head>
+    <title>Arrêtés</title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap-responsive.min.css" rel="stylesheet" />
+    <link href="Content/arreteManagementStyles.css" rel="stylesheet" />
+</head>
+<body> 
+
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand " href="#/">
+                    <img src="Content/Images/suresnes_fr.png" alt="logo"> Arrêtés et autorisations
+                </a>
+                <ul class="nav nav-pills" data-ng-controller="NavbarController">
+                    <li data-ng-class="{'active':getClass('/arretes')}"><a href="#/arretes">Arrêtés</a></li>
+
+                    <!-- >li data-ng-class="{'active':getClass('/autorisations')}"><a href="#/autorisations">Autorisations</a></li-->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Note that AngularJS 1.2+ now has a built-in ng-animation direction. Left in animated-view to show a 
+         custom directive -->
+    <div animated-view></div>
+
+
+    <div id="footer">
+        <div class="navbar navbar-fixed-bottom">
+            <div class="navbar-inner">
+                <div class="container">
+                    <footer>
+                        <div class="row">
+                            <div class="span4">
+                                Created by Eric THIEBAUT from Dan Wahlin Sample
+                            </div>
+                        </div>
+                   </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vendor Libs: jQuery only used for Bootstrap functionality -->
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <script src="Scripts/jquery.min.js"></script>
+
+    <!-- UI Libs -->
+    <script src="Scripts/bootstrap.js"></script>
+
+
+    <!-- App libs -->
+    <script src="app.js"></script>
+    <script src="controllers/controllers.js"></script>
+    <script src="services/arretesService.js"></script>
+    <script src="directives/animatedView.js"></script>
+    <script src="directives/input_format.js"></script>
+</body>
+</html>

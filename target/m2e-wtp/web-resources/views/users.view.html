@@ -1,0 +1,34 @@
+﻿<div class="arretes">
+    <div class="container">
+        <header>
+            <h3>Utilisateurs</h3>
+        </header>
+        <div>
+            <div class="row cardContainer">
+                <div class="span3 card" data-ng-repeat="user in allUsers | orderBy:'username'">
+                    <button class="btn close cardClose" data-ng-click="deleteUser(user.id)">&times;</button>
+                    <div class="cardHeader">{{user.username}}</div>
+                    <div class="cardBody">{{""}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span3">
+                Identifiant:
+                <br />
+                <input data-ng-model="adduser.username" type="text" placeholder="Identifiant">
+            </div>
+            <div class="span3">
+                Mot de passe:
+                <br />
+                <input data-ng-model="adduser.password" type="password" placeholder="Mot de passe">
+            </div>
+            
+            <div class="span6">
+            <br>
+                <button id="submitNewUser" class="btn btn-primary" type="button" 
+                    data-ng-click="addNewUser()">Ajouter Utilisateur</button>
+            </div>
+        </div>
+    </div>
+</div>
