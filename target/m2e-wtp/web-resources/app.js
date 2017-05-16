@@ -1,4 +1,4 @@
-﻿var app = angular.module('app', ['ngRoute', 'ngCookies','ui.bootstrap','ngCkeditor']);
+﻿var app = angular.module('app', ['ngRoute', 'ngCookies','ui.bootstrap','ngCkeditor','ui.router']);
 
 
 (function () {

@@ -1,18 +1,19 @@
 ﻿body {
 	padding: 65px;
-	margin-left:25px;	
+	margin-left: 25px;
 }
 
 .section {
-    background-color: #efefef;
-    height:800px;
+	background-color: #efefef;
+	height: 800px;
 }
+
 .container {
-    width: 99%;
-    margin-left:10px;
-    position:absolute;
-    top:120px;
-    padding-bottom:80px;
+	width: 99%;
+	margin-left: 10px;
+	position: absolute;
+	top: 120px;
+	padding-bottom: 80px;
 }
 
 .view {
@@ -27,6 +28,7 @@
 	height: 75px;
 	width: 225px;
 	margin-bottom: 20px;
+	list-style: none;
 }
 
 .cardHeader {
@@ -47,17 +49,17 @@
 	border: 1px solid black;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	margin:10px 0 20px 0;
-	padding:20px;
+	margin: 10px 0 20px 0;
+	padding: 20px;
 	position: relative;
 }
 
 .cardContainer .title {
-   top:-15px;
-   left:40px;
-   background: white;
-   padding: 0px 10px 0px 10px;
-	position:absolute;
+	top: -15px;
+	left: 40px;
+	background: white;
+	padding: 0px 10px 0px 10px;
+	position: absolute;
 	font-size: 1.5em;
 	font-weight: bold;
 }
@@ -74,13 +76,10 @@
 	margin-left: 20px;
 }
 
-
 footer {
 	margin-top: 10px;
 	font-weight: bold;
 }
-
-
 
 .navbar .nav {
 	margin-left: 50px;
@@ -92,49 +91,101 @@ footer {
 }
 
 .navbar-fixed-top, .navbar-static-top {
-	border-bottom: 3px solid rgba(0,0,0,0.175);
-	background:white;
+	border-bottom: 3px solid rgba(0, 0, 0, 0.175);
+	background: white;
 }
 
-.navbar-fixed-bottom  {
-	border-top: 3px solid rgba(0,0,0,0.175);
-	background:white;
+.navbar-fixed-bottom {
+	border-top: 3px solid rgba(0, 0, 0, 0.175);
+	background: white;
 }
-/*
-.span3 {
-    width: 230px;
-}*/
 
-.fields {
-	border: 1px solid black;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	padding:20px;
-	width:100%;
-	position:relative;
-}
-.fields .title {
-   top:-15px;
-   left:40px;
-   background: white;
-   padding: 0px 10px 0px 10px;
-	position:absolute;
-	font-size: 1.5em;
-	font-weight: bold;
-}
+
 .site-logo {
-	float:left;
-	padding:10px;
+	float: left;
+	padding: 10px;
 }
+
 .site-title {
 	font-size: 40px;
 	width: 100%;
 	text-align: center;
 }
 
-.ng-ckeditor{border:0}
+.ng-ckeditor {
+	border: 0
+}
 
 .uib-datepicker-popup {
-	z-index:2000
+	z-index: 2000
 }
+
+.pagination {
+	margin: initial;
+}
+
+.saisie {
+	border: 1px solid black;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding: 20px;
+	width: 100%;
+	position: relative;
+}
+
+.saisie-title {
+	top: -15px;
+	left: 40px;
+	background: white;
+	padding: 0px 10px 0px 10px;
+	position: absolute;
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.doc-arrete {
+}
+
+.doc-arrete .entete .entete-gauche {
+	float:left;
+	padding:15px;
+	
+}
+.doc-arrete .corps {
+     	clear:both;
+}
+
+.doc-arrete .entete .entete-gauche .carre {
+	border: 1px solid black;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding: 10px;
+	width: 100%;
+	position: relative;
+	
+}
+
+.doc-arrete .entete .carre-gauche .title {
+	font-weight:bold;
+}
+
+.input-date input {
+	width:150px;
+}
+
+.corps .input-group {
+	clear:both;
+	padding-top:20px;
+}
+
+.inline div {
+	float:left;
+}
+
+.inline .sep {
+	padding-left:20px;
+}
+
+.romain {
+	list-style-type: Upper-Roman;
 }

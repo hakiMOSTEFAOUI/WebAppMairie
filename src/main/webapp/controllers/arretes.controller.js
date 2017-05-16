@@ -44,6 +44,16 @@ app.controller('ArretesController', function($scope, arretesService) {
 		    $scope.popup3.opened = true;
 	 };
 
+	  $scope.ajouter_partie= function() {
+		    if (!$scope.newArrete.parties) $scope.newArrete.parties= [{}];
+		    else $scope.newArrete.parties.push({});
+	 };
+
+	  $scope.ajouter_article= function(partie) {
+		    if (!partie.articles) partie.articles= [{}];
+		    else partie.articles.push({});
+	 };
+
 	  //uibPaging.create(this, $scope, $attrs);
 	  
     //I like to have an init() for controllers that need to perform some initialization. Keeps things in
@@ -62,10 +72,13 @@ app.controller('ArretesController', function($scope, arretesService) {
 	  $scope.popup3 = {
 			    opened: false
 			  };
+	  $scope.types_delai=["le","à partir du", "du..au"];
         $scope.arretes = arretesService.getArretes();
     	  $scope.totalItems = 64;
     	//  $scope.bigTotalItems = 175;
 
+    	  $scope.newArrete= {type_delai:"le"};
+    	  
       $scope.totalItems =  $scope.arretes.length;
 	  $scope.currentPage = 1;
 	  $scope.pageSize = 3;

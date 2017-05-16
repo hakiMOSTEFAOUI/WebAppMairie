@@ -1,0 +1,141 @@
+
+
+	<div class="saisie" ng-show="globals.currentUser">
+		<div class="saisie-title">Saisie arrêté</div>
+		<div class="doc-arrete">
+			République française
+
+			<div class="entete">
+				<div class="entete-gauche">
+					<input type="text" data-ng-model="newArrete.service"
+						placeholder="Service"
+						uib-typeahead="state as state.name for state in statesWithFlags | filter:{name:$viewValue}"
+						typeahead-template-url="customTemplate.html" class="form-control"
+						typeahead-show-hint="true" typeahead-min-length="0"> <input
+						type="text" data-ng-model="newArrete.sigle_service"
+						placeholder="Sigle service"
+						uib-typeahead="state as state.name for state in statesWithFlags | filter:{name:$viewValue}"
+						typeahead-template-url="customTemplate.html" class="form-control"
+						typeahead-show-hint="true" typeahead-min-length="0">
+
+					<div class="carre">
+						<input type="text" data-ng-model="newArrete.titre" type="text"
+							placeholder="Titre"> <br> <input type="text"
+							data-ng-model="newArrete.libelle" type="text"
+							placeholder="Libellé">
+					</div>
+					<input type="text" data-ng-model="newArrete.num_an" type="text"
+						placeholder="Année"> . <input type="text"
+						data-ng-model="newArrete.nume" type="text" placeholder="Numéro">
+				</div>
+				<div class="inline">
+					<div>
+						<input data-ng-model="newArrete.petitionDate" type="text"
+							class="form-control" uib-datepicker-popup="dd/MM/yyyy"
+							placeholder="Date pétition" is-open="popup1.opened"
+							datepicker-options="dateOptions" ng-required="true"
+							close-text="Close" alt-input-formats="altInputFormats" />
+					</div>
+					<div>
+						<button type="button" class="btn btn-default" ng-click="open1()">
+							<i class="glyphicon glyphicon-calendar"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="corps">
+				<div class="inline">
+					<div>
+						<select class="" ng-model="newArrete.type_delai"
+							ng-options="item for item in types_delai">
+						</select>
+					</div>
+					<div class="sep animate-switch-container" ng-switch
+						on="newArrete.type_delai">
+						<div class="animate-switch" ng-switch-when="le|à partir du"
+							ng-switch-when-separator="|">
+							<div>
+								<input data-ng-model="newArrete.startDateAutorisation"
+									type="text" class="" uib-datepicker-popup="dd/MM/yyyy"
+									placeholder="{{newArrete.type_delai}}" is-open="popup2.opened"
+									datepicker-options="dateOptions" ng-required="true"
+									close-text="Close" alt-input-formats="altInputFormats" />
+							</div>
+							<div>
+								<button type="button" class="btn btn-default" ng-click="open2()">
+									<i class="glyphicon glyphicon-calendar"></i>
+								</button>
+							</div>
+						</div>
+						<div class="animate-switch" ng-switch-when="du..au">
+							<div>
+								<input data-ng-model="newArrete.startDateAutorisation"
+									type="text" class="" uib-datepicker-popup="dd/MM/yyyy"
+									placeholder="début" is-open="popup2.opened"
+									datepicker-options="dateOptions" ng-required="true"
+									close-text="Close" alt-input-formats="altInputFormats" />
+							</div>
+							<div>
+								<button type="button" class="btn btn-default" ng-click="open2()">
+									<i class="glyphicon glyphicon-calendar"></i>
+								</button>
+							</div>
+							<div class="sep">
+								<input data-ng-model="newArrete.endDateAutorisation" type="text"
+									class="form-control" uib-datepicker-popup="dd/MM/yyyy"
+									placeholder="fin" is-open="popup3.opened"
+									datepicker-options="dateOptions" ng-required="true"
+									close-text="Close" alt-input-formats="altInputFormats" />
+							</div>
+							<div>
+								<button type="button" class="btn btn-default" ng-click="open3()">
+									<i class="glyphicon glyphicon-calendar"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div style="clear: both">
+					<textarea ckeditor="editorOptions"
+						placeholder="ajouter texte premier paragraphe"
+						ng-model="newArrete.contenu"></textarea>
+				</div>
+				<ul>
+					<li class="romain" ng-repeat="partie in newArrete.parties">
+						<div >
+							<input placeholder="titre" data-ng-model="partie.titre" type="text" />
+						</div>
+						<div style="clear: both">
+
+							<ul>
+								<li class="romain" ng-repeat="article in partie.articles">
+									<div style="float: left">ARTICLE</div>
+									<div style="float: right;width:85%">
+										<textarea ckeditor="editorOptions"
+											placeholder="ajouter texte premier paragraphe"
+											ng-model="article.contenu"></textarea>
+									</div>
+									<div style="clear: both">
+								</li>
+							</ul>
+
+								<button type="button" class="btn btn-default"
+									ng-click="ajouter_article(partie)">ajouter article</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<div>
+					<button type="button" class="btn btn-default"
+						ng-click="ajouter_partie()">ajouter partie</button>
+				</div>
+
+
+				<button id="submitArrete" class="btn btn-primary" type="button"
+					data-ng-disabled="!newArrete.typeAutorisation || !newArrete.petitionDate "
+					data-ng-click="insertArrete()">Ajouter Arrêté</button>
+			</div>
+		</div>
+	</div>
