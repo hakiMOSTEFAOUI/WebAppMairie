@@ -18,7 +18,7 @@
 
 
 //app.controller('ArretesController', function($scope, $attrs, uibPaging, uibPagerConfig, arretesService) {
-app.controller('ArretesController', function($scope, arretesService) {
+app.controller('arretesController', function($scope, arretesService) {
 
 
 			$scope.editorOptions = {
@@ -50,7 +50,8 @@ app.controller('ArretesController', function($scope, arretesService) {
 	 };
 
 	  $scope.ajouter_article= function(partie) {
-		    if (!partie.articles) partie.articles= [{}];
+		  $scope.newArrete.nbArticles++;
+		    if (!partie.articles) partie.articles= [{'num':romanize($scope.newArrete.nbArticles)}];
 		    else partie.articles.push({});
 	 };
 
@@ -72,12 +73,12 @@ app.controller('ArretesController', function($scope, arretesService) {
 	  $scope.popup3 = {
 			    opened: false
 			  };
-	  $scope.types_delai=["le","à partir du", "du..au"];
+	  $scope.types_periode={1:"le",2:"à partir du", 3:"du..au"};
         $scope.arretes = arretesService.getArretes();
     	  $scope.totalItems = 64;
     	//  $scope.bigTotalItems = 175;
 
-    	  $scope.newArrete= {type_delai:"le"};
+    	  $scope.newArrete= {type_periode:"le",nbArticles:0};
     	  
       $scope.totalItems =  $scope.arretes.length;
 	  $scope.currentPage = 1;

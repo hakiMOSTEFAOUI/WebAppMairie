@@ -38,10 +38,13 @@
 	padding: 5px;
 }
 
-.cardClose {
-	color: white;
-	font-weight: bold;
-	margin-right: 5px;
+button.cardClose, button.cardEdit {
+    background:transparent url(images/trash.png) no-repeat top left;
+    cursor:pointer;
+    width: 20px;
+    height: 20px;
+    margin:6px;
+    border: none;
 }
 
 .cardContainer {
@@ -186,6 +189,6 @@ footer {
 	padding-left:20px;
 }
 
-.romain {
-	list-style-type: Upper-Roman;
+.li-none {
+	list-style-type: none;
 }

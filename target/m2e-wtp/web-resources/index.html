@@ -16,7 +16,7 @@
 					 Gestion des
 					arrêtés
 				</div>
-				<ul class="nav nav-pills" data-ng-controller="NavbarController">
+				<ul class="nav nav-pills" data-ng-controller="navbarController">
 					<li data-ng-class="{'active':getClass('/arretes')}"><a
 						href="#!/arretes">Arrêtés</a></li>
 					<li data-ng-show="globals.currentUser"
@@ -40,6 +40,7 @@
 				ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }"
 				ng-if="flash" ng-bind="flash.message"></div>
 			<div ng-view></div>
+			
 		</div>
 	</div>
 
@@ -67,6 +68,7 @@
 	<script src="scripts/angular-ui-router-0.2.18.min.js"></script>
 	<script src="scripts/bootstrap.3.3.1.min.js"></script>
 	<script src="scripts/ui-bootstrap-tpls-2.5.0.min.js"></script>
+	<script src="scripts/utils.js"></script>
 <script>
     var CKEDITOR_BASEPATH = '/' + location.pathname.split('/')[1] + '/scripts/ckeditor/';
 </script>
@@ -77,12 +79,15 @@
 	<script src="app.js"></script>
 	<script src="directives/animated_view.js"></script>
 	<script src="directives/input_format.js"></script>
+	<script src="directives/output_format.js"></script>
 	<script src="directives/pager.js"></script>
 
 	<script src="services/arretes.service.js"></script>
 	<script src="services/authentication.service.js"></script>
 	<script src="services/flash.service.js"></script>
 	<script src="services/user.service.local-storage.js"></script>
+
+	<script src="services/bouchons.js"></script>
 
 	<script src="controllers/nav_bar.controller.js"></script>
 	<script src="controllers/arretes.controller.js"></script>

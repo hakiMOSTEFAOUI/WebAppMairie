@@ -1,12 +1,6 @@
-﻿(function () {
-    'use strict';
+﻿app.service('userService', function ($http) {
 
-    angular
-        .module('app')
-        .factory('UserService', UserService);
 
-    UserService.$inject = ['$http'];
-    function UserService($http) {
         var service = {};
 
         service.GetAll = GetAll;
@@ -53,6 +47,6 @@
                 return { success: false, message: error };
             };
         }
-    }
+    
 
-})();
+});

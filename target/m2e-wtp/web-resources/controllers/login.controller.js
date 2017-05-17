@@ -3,7 +3,7 @@
 
     angular
         .module('app')
-        .controller('LoginController', LoginController);
+        .controller('loginController', LoginController);
 
     LoginController.$inject = ['$location', 'AuthenticationService', 'FlashService'];
     function LoginController($location, AuthenticationService, FlashService) {

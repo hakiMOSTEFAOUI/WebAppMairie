@@ -8,19 +8,20 @@
         .config(config)
         .run(run);
 
-    config.$inject = ['$routeProvider', '$locationProvider','$qProvider'];
-    function config($routeProvider, $locationProvider,$qProvider) {
+    config.$inject = ['$routeProvider', '$locationProvider','$qProvider','$stateProvider'];
+    function config($routeProvider, $locationProvider,$qProvider,$stateProvider	) {
     	$qProvider.errorOnUnhandledRejections(false);
 
         $routeProvider
-            .when('/users', {
-            	controller: 'UsersController',
-                templateUrl: 'views/users.view.html',
-                controllerAs: 'vm'
-            })
+         
+        .when('/users', {
+        	controller: 'usersController',
+            templateUrl: 'views/users.view.html',
+            controllerAs: 'vm'
+        })
 
             .when('/login', {
-                controller: 'LoginController',
+                controller: 'loginController',
                 templateUrl: 'views/login.view.html',
                 controllerAs: 'vm'
             })
@@ -28,7 +29,7 @@
 
         .when('/arretes',
             {
-                controller: 'ArretesController',
+                controller: 'arretesController',
                 templateUrl: 'views/arretes.view.html',
                     controllerAs: 'vm'
 
@@ -42,10 +43,18 @@
 
             })
         .otherwise({ redirectTo: '/arretes' });
+        
+        /*
+        $stateProvider.state('arretes'), 
+        	'views': {		
+        		'filters': {		
+        			templateUrl: 'views/arrete.saisie.html',		
+        			controller: function($scope){ ... controller stuff just for filters view ... }		
+            },	*/
 
     }
 
-    run.$inject = ['$rootScope', '$location', '$cookies', '$http'];
+    run.$inject = ['$rootScope', '$location', '$cookies', '$http','bouchons'];
     function run($rootScope, $location, $cookies, $http) {
         // keep user logged in after page refresh
         $rootScope.globals = $cookies.getObject('globals') || {};

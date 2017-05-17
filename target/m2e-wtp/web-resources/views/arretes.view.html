@@ -14,11 +14,11 @@
 				<li class="span3 card"
 					ng-repeat="arrete in arretes | startFrom:(currentPage-1)*pageSize | limitTo:pageSize">
 					<button class="btn close cardClose"
-						data-ng-click="deleteArrete(Arrete.id)">&times;</button>
-					<div class="cardHeader">{{arrete.number + ' ' +
-						arrete.typeAutorisation}}</div>
+						data-ng-click="deleteArrete(Arrete.id)"></button>
+					<div class="cardHeader">{{arrete.num_an}}.{{arrete.num|numberFixedLen:4}}
+						</div>
 					<div class="cardBody">
-						{{arrete.petitionDate | date:'EEE dd MMM yyyy'}} <a
+						{{arrete.date_document | date:'EEE dd MMM yyyy'}} <a
 							href="#!/arrete/{{arrete.number}}" class="cardBody btn-link">
 							{{ arrete.arretes.length }} Détail</a>
 					</div>
@@ -29,5 +29,147 @@
 			ng-model="currentPage" max-size="maxSize" class="pagination-sm"
 			boundary-links="true" force-ellipses="true"></div>
 	</div>
-   <ui-view />
+
+
+
+
+
+
+	<div class="saisie" ng-show="globals.currentUser">
+		<div class="saisie-title">Saisie arrêté</div>
+		<div class="doc-arrete">
+			République française
+
+			<div class="entete">
+				<div class="entete-gauche">
+					<input type="text" data-ng-model="newArrete.service"
+						placeholder="Service"
+						uib-typeahead="state as state.name for state in statesWithFlags | filter:{name:$viewValue}"
+						typeahead-template-url="customTemplate.html" class="form-control"
+						typeahead-show-hint="true" typeahead-min-length="0"> <input
+						type="text" data-ng-model="newArrete.sigle_service"
+						placeholder="Sigle service"
+						uib-typeahead="state as state.name for state in statesWithFlags | filter:{name:$viewValue}"
+						typeahead-template-url="customTemplate.html" class="form-control"
+						typeahead-show-hint="true" typeahead-min-length="0">
+
+					<div class="carre">
+						<input type="text" data-ng-model="newArrete.titre" type="text"
+							placeholder="Titre"> <br> <input type="text"
+							data-ng-model="newArrete.libelle" type="text"
+							placeholder="Libellé">
+					</div>
+					<input type="text" data-ng-model="newArrete.num_an" type="text"
+						placeholder="Année"> . <input type="text"
+						data-ng-model="newArrete.nume" type="text" placeholder="Numéro">
+				</div>
+				<div class="inline">
+					<div>
+						<input data-ng-model="newArrete.date_document" type="text"
+							class="form-control" uib-datepicker-popup="dd/MM/yyyy"
+							placeholder="Date document" is-open="popup1.opened"
+							datepicker-options="dateOptions" ng-required="true"
+							close-text="Close" alt-input-formats="altInputFormats" />
+					</div>
+					<div>
+						<button type="button" class="btn btn-default" ng-click="open1()">
+							<i class="glyphicon glyphicon-calendar"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="corps">
+				<div class="inline">
+					<div>
+						<select class="" ng-model="newArrete.type_periode"
+							ng-options="item for item in types_periode">
+						</select>
+					</div>
+					<div class="sep animate-switch-container" ng-switch
+						on="newArrete.type_periode">
+						<div class="animate-switch" ng-switch-when="le|à partir du"
+							ng-switch-when-separator="|">
+							<div>
+								<input data-ng-model="newArrete.date_deb"
+									type="text" class="" uib-datepicker-popup="dd/MM/yyyy"
+									placeholder="{{newArrete.type_periode}}" is-open="popup2.opened"
+									datepicker-options="dateOptions" ng-required="true"
+									close-text="Close" alt-input-formats="altInputFormats" />
+							</div>
+							<div>
+								<button type="button" class="btn btn-default" ng-click="open2()">
+									<i class="glyphicon glyphicon-calendar"></i>
+								</button>
+							</div>
+						</div>
+						<div class="animate-switch" ng-switch-when="du..au">
+							<div>
+								<input data-ng-model="newArrete.date_deb"
+									type="text" class="" uib-datepicker-popup="dd/MM/yyyy"
+									placeholder="début" is-open="popup2.opened"
+									datepicker-options="dateOptions" ng-required="true"
+									close-text="Close" alt-input-formats="altInputFormats" />
+							</div>
+							<div>
+								<button type="button" class="btn btn-default" ng-click="open2()">
+									<i class="glyphicon glyphicon-calendar"></i>
+								</button>
+							</div>
+							<div class="sep">
+								<input data-ng-model="newArrete.date_fin" type="text"
+									class="form-control" uib-datepicker-popup="dd/MM/yyyy"
+									placeholder="fin" is-open="popup3.opened"
+									datepicker-options="dateOptions" ng-required="true"
+									close-text="Close" alt-input-formats="altInputFormats" />
+							</div>
+							<div>
+								<button type="button" class="btn btn-default" ng-click="open3()">
+									<i class="glyphicon glyphicon-calendar"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div style="clear: both">
+					<textarea ckeditor="editorOptions"
+						placeholder="ajouter texte premier paragraphe"
+						ng-model="newArrete.contenu"></textarea>
+				</div>
+				<ul>
+					<li class="romain" ng-repeat="partie in newArrete.parties">
+						<div>
+							<input placeholder="titre" data-ng-model="partie.titre"
+								type="text" />
+						</div>
+						<div style="clear: both">
+
+							<ul>
+								<li class="li-none" ng-repeat="article in partie.articles">
+									<div style="float: left">ARTICLE {{article.num}}</div>
+									<div style="float: right; width: 85%">
+										<textarea ckeditor="editorOptions"
+											placeholder="ajouter texte premier paragraphe"
+											ng-model="article.contenu"></textarea>
+									</div>
+									<div style="clear: both">
+								</li>
+							</ul>
+
+							<button type="button" class="btn btn-default"
+								ng-click="ajouter_article(partie)">ajouter article</button>
+						</div>
+			</div>
+			<div>
+				<button type="button" class="btn btn-default"
+					ng-click="ajouter_partie()">ajouter partie</button>
+			</div>
+
+
+			<button id="submitArrete" class="btn btn-primary" type="button"
+				data-ng-disabled="!newArrete.typeAutorisation || !newArrete.date_document "
+				data-ng-click="insertArrete()">Ajouter Arrêté</button>
+		</div>
+	</div>
 </div>

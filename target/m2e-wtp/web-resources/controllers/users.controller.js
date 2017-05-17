@@ -1,13 +1,10 @@
 ﻿(function () {
     'use strict';
 
-    angular
+    angular.module('app').controller('usersController', UsersController);
 
-    .module('app')
-        .controller('UsersController', UsersController);
-
-    UsersController.$inject = ['$scope', 'UserService', 'FlashService', '$rootScope'];
-    function UsersController($scope, UserService, FlashService, $rootScope) {
+    UsersController.$inject = ['$scope', 'userService', 'FlashService', '$rootScope'];
+    function UsersController($scope, userService, FlashService, $rootScope) {
 
         $scope.user = null;
         $scope.adduser = null;
@@ -21,21 +18,21 @@
         }
 
         function loadCurrentUser() {
-            UserService.GetByUsername($rootScope.globals.currentUser.username)
+            userService.GetByUsername($rootScope.globals.currentUser.username)
                 .then(function (user) {
                     $scope.user = user;
                 });
         }
 
         function loadAllUsers() {
-            UserService.GetAll()
+            userService.GetAll()
                 .then(function (users) {
                     $scope.allUsers = users;
                 });
         }
 
         $scope.deleteUser  = function (id) {
-            UserService.Delete(id)
+            userService.Delete(id)
 	            .then(function () {
                     FlashService.Success('Utilisateur supprimé', true);
 
@@ -45,7 +42,7 @@
 
         $scope.addNewUser = function () {
             $scope.dataLoading = true;
-            UserService.Create($scope.adduser)
+            userService.Create($scope.adduser)
                 .then(function (response) {
                     if (response.success) {
                         FlashService.Success('Utilisateur ajouté', true);

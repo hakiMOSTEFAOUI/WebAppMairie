@@ -1,63 +1,39 @@
-﻿(function () {
-    'use strict';
+﻿app.service('userService', function ($http, $timeout, $filter, $q) {
 
-    angular
-        .module('app')
-        .factory('UserService', UserService);
 
-    UserService.$inject = ['$timeout', '$filter', '$q'];
-    function UserService($timeout, $filter, $q) {
-
-        var service = {};
-
-        service.GetAll = GetAll;
-        service.GetById = GetById;
-        service.GetByUsername = GetByUsername;
-        service.Create = Create;
-        service.Update = Update;
-        service.Delete = Delete;
-
-        var userTst= {
-        		id:1,	
-        		username:'test',
-        		password:'test'
-    }
-        
-        setUsers([userTst]);
-        return service;
-
-        function GetAll() {
+  
+         this.GetAll= function() {
             var deferred = $q.defer();
-            deferred.resolve(getUsers());
+            deferred.resolve(this.getUsers());
             return deferred.promise;
         }
 
-        function GetById(id) {
+         this.GetById= function(id) {
             var deferred = $q.defer();
-            var filtered = $filter('filter')(getUsers(), { id: id });
+            var filtered = $filter('filter')(this.getUsers(), { id: id });
             var user = filtered.length ? filtered[0] : null;
             deferred.resolve(user);
             return deferred.promise;
         }
 
-        function GetByUsername(username) {
+        this.GetByUsername= function(username) {
             var deferred = $q.defer();
-            var filtered = $filter('filter')(getUsers(), { username: username });
+            var filtered = $filter('filter')(this.getUsers(), { username: username });
             var user = filtered.length ? filtered[0] : null;
             deferred.resolve(user);
             return deferred.promise;
         }
 
-        function Create(user) {
+        this.Create= function(user) {
             var deferred = $q.defer();
             // simulate api call with $timeout
             $timeout(function () {
-                GetByUsername(user.username)
-                    .then(function (duplicateUser) {
+            	this.GetByUsername(user.username)
+                    .then(function (duplicateuser) {
                         if (duplicateUser !== null) {
                             deferred.resolve({ success: false, message: 'Username "' + user.username + '" is already taken' });
                         } else {
-                            var users = getUsers();
+                            var users = this.getUsers();
 
                             // assign id
                             var lastUser = users[users.length - 1] || { id: 0 };
@@ -75,10 +51,10 @@
             return deferred.promise;
         }
 
-        function Update(user) {
+        this.Update= function(user) {
             var deferred = $q.defer();
 
-            var users = getUsers();
+            var users = this.getUsers();
             for (var i = 0; i < users.length; i++) {
                 if (users[i].id === user.id) {
                     users[i] = user;
@@ -86,12 +62,12 @@
                 }
             }
             setUsers(users);
-            deferred.resolve();
+            this.deferred.resolve();
 
             return deferred.promise;
         }
 
-        function Delete(id) {
+        this.Delete= function(id) {
             var deferred = $q.defer();
 
             var users = getUsers();
@@ -102,7 +78,7 @@
                     break;
                 }
             }
-            setUsers(users);
+            this.setUsers(users);
             deferred.resolve();
 
             return deferred.promise;
@@ -110,7 +86,7 @@
 
         // private functions
 
-        function getUsers() {
+        this.getUsers= function() {
         	console.log(localStorage.users);
             if(!localStorage.users){
                 localStorage.users = JSON.stringify([]);
@@ -119,10 +95,8 @@
             return JSON.parse(localStorage.users);
         }
 
-        function setUsers(users) {
+        this.setUsers= function(users) {
             localStorage.users = JSON.stringify(users);
         }
 
-
-    }
-})();
+});
